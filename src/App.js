@@ -30,13 +30,30 @@ function App() {
     }
   }
 
+  const handleStart = () => {
+    setChunks([])
+    fetch(`${process.env.REACT_APP_API_URL}/start`)
+    fff()
+  }
+
+  const handleReset = () => {
+    setChunks([])
+    fetch(`${process.env.REACT_APP_API_URL}/reset`)
+  }
+
   useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/initial`).then(async (response) => {
+      const processes = await response.json()
+      setChunks(processes)
+    })
     fff()
     return () => { }
   }, [])
 
   return (
     <div>
+      <button onClick={handleStart}>start</button>
+      <button onClick={handleReset}>reset</button>
       {chunks.map((chunk, index) => {
         return <div key={index}>{chunk}</div>
       })
