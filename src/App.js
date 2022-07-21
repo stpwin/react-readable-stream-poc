@@ -4,7 +4,7 @@ function App() {
   const [chunks, setChunks] = useState([]);
 
   const fff = async () => {
-    fetch('http://localhost:9000/stream')
+    fetch(`${process.env.REACT_APP_API_URL}/stream`)
       .then(async (response) => {
         // response.body is a ReadableStream
         const reader = response.body.getReader();
